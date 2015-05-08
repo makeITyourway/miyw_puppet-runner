@@ -31,10 +31,10 @@ class miyw_puppet-runner (
 
         file { '/sbin/puppet-runner':
                 ensure => 'link',
-                target => "$basedir/scripts/puppet-runner.sh',
+                target => "$basedir/scripts/puppet-runner.sh",
         }
 
-	cron { "puppet-runner__$sitename":
+	cron { "puppet-runner script --> $sitename":
                         command         =>      "/sbin/puppet-runner",
                         ensure          =>      $cron,
                         user            =>      'root',
