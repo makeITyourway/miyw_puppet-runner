@@ -34,7 +34,7 @@ class miyw_puppet-runner (
                 target => "$basedir/scripts/puppet-runner.sh',
         }
 
-	cron { "run puppet-runner ($sitename) script":
+	cron { "puppet-runner $sitename script":
                         command         =>      "/sbin/puppet-runner",
                         ensure          =>      $cron,
                         user            =>      'root',
