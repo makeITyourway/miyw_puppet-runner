@@ -25,7 +25,7 @@ class miyw_puppet-runner (
 
 
         file { "$basedir/scripts/puppet-runner.sh":
-                content =>      template('puppet-runner.erb'),
+                content =>      template('miyw_puppet-runner/puppet-runner.erb'),
                 mode    =>      '0755',
         }
 
