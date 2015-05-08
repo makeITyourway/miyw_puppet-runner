@@ -1,0 +1,29 @@
+#!/bin/bash
+
+if [ `whoami` != "root" ] ; then
+	echo "must run as root !"
+	exit 1
+fi
+
+##---- config
+basedir="<%= @basedir %>"
+site="$basedir/<%= @sitename %>"
+modules="$basedir/modules/"
+logcmd="--logdest=syslog"
+
+
+if [ "<%= @log %>" == "true" ] ; then
+	log=$logcmd
+fi
+
+# script
+echo -e "\n+++ updating Puppet REPO\n"
+cd $basedir
+git pull
+
+
+echo -e "\n+++ done - running puppet\n"
+/usr/bin/puppet apply $site --modulepath=$modules $log $*
+echo -e "\n+++ done - finished\n"
+
+exit 0
