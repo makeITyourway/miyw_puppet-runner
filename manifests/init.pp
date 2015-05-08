@@ -25,7 +25,7 @@ class miyw_puppet-runner (
 
 
         file { "$basedir/scripts/puppet-runner.sh":
-                content =>      template('puppet-runner/puppet-runner.erb'),
+                content =>      template('miyw_puppet-runner/puppet-runner.erb'),
                 mode    =>      '0755',
         }
 
@@ -34,7 +34,7 @@ class miyw_puppet-runner (
                 target => "$basedir/scripts/puppet-runner.sh',
         }
 
-	cron { 'run puppet-runner ($sitename) script':
+	cron { "run puppet-runner ($sitename) script":
                         command         =>      "/sbin/puppet-runner",
                         ensure          =>      $cron,
                         user            =>      'root',
