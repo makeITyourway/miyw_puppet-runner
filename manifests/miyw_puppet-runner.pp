@@ -1,35 +1,40 @@
 class miyw_puppet-runner (
                 $sitename = 'template.pp',
                 $log = 'false',
-		$basedir = '/opt/puppet/scripts/',
+		$basedir = '/opt/puppet/',
 		$cron = 'present',
 		$cron_min = '*/5',
         ){
 
 
 
-        #file { [ "/opt/scripts/", "/opt/scripts/puppet/", ]:
         file { "$basedir" :
                 ensure => "directory",
                 recurse => 'true',
         }
 
-#        file { "/opt/mxd-scripts/puppet/" :
-#                ensure => "directory",
-#                recurse => 'true',
-#        }
+        file { "$basedir/scripts/" :
+                ensure => "directory",
+                recurse => 'true',
+        }
 
-        file { "$basedir/puppet/puppet-runner.sh":
+        file { "$basedir/repo/" :
+                ensure => "directory",
+                recurse => 'true',
+        }
+
+
+        file { "$basedir/scripts/puppet-runner.sh":
                 content =>      template('puppet-runner/puppet-runner.erb'),
                 mode    =>      '0755',
         }
 
         file { '/sbin/puppet-runner':
                 ensure => 'link',
-                target => "$basedir/puppet-runner.sh',
+                target => "$basedir/scripts/puppet-runner.sh',
         }
 
-	cron { 'run puppet (runner) script':
+	cron { 'run puppet-runner ($sitename) script':
                         command         =>      "/sbin/puppet-runner",
                         ensure          =>      $cron,
                         user            =>      'root',

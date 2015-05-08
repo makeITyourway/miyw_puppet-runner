@@ -7,8 +7,9 @@ fi
 
 ##---- config
 basedir="<%= @basedir %>"
-site="$basedir/<%= @sitename %>"
-modules="$basedir/modules/"
+repodir="<%= @basedir %>/repo"
+sitefile="$basedir/<%= @sitename %>"
+modules="$repodir/modules/"
 logcmd="--logdest=syslog"
 
 
@@ -23,7 +24,7 @@ git pull
 
 
 echo -e "\n+++ done - running puppet\n"
-/usr/bin/puppet apply $site --modulepath=$modules $log $*
+/usr/bin/puppet apply $sitefile --modulepath=$modules $log $*
 echo -e "\n+++ done - finished\n"
 
 exit 0
